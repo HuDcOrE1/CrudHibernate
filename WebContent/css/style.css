@@ -1,0 +1,46 @@
+.ancho{
+	width: 80%;	
+	margin: 0 auto;
+}
+.margen_login{
+	margin-top:5%;
+}
+.margenes{
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.color_login{
+	 border-left: 6px solid #286090;
+    background-color: lightgrey;
+}
+.margen_login{
+	padding-top: 80px;
+}
+.background-login{
+	background: #356AA0;
+	width: 100%;
+	height: 50px;
+}
+.center-text{
+	margin:auto;
+	text-align: center;
+	line-height:51px;
+	vertical-align:middle;
+}
+.formulario-login{
+	background: #ECECEC;
+	padding: 40px;
+}
+.text-white{
+	color:#FFF !important;
+}
+.text-black{
+	color:#FFF !important;
+}
+.borde-rad{
+	border-radius: 5px 5px;
+}
+
+
+

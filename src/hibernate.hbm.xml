@@ -10,5 +10,10 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password"></property>
         <property name="connection.pool_size">1</property>
+        
+        <!-- MAPEO DE LOS ARCHIVOS CON LA BASE DE DATOS -->
+        <mapping resource="Model/Carreras.hbm.xml"/>
+        
+        <!-- FIN DEL MAPEO DE LOS ARCHIVOS CON LA BASE DE DATOS -->
     </session-factory>
  </hibernate-configuration>
