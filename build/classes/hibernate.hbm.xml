@@ -2,8 +2,13 @@
 <!DOCTYPE hibernate-configuration PUBLIC
 		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
 		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
-<hibenate-configuration>
-	<session-factory>
-		<property name="hibernate-connection.driver_class">org.gjt.mm.mysql.Driver</property>
-	</session-factory>
-</hibenate-configuration>
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">org.gjt.mm.mysql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost/hibernate</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password"></property>
+        <property name="connection.pool_size">1</property>
+    </session-factory>
+ </hibernate-configuration>
