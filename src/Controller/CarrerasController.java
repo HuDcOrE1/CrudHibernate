@@ -1,6 +1,8 @@
 package Controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,7 +29,24 @@ public class CarrerasController extends HttpServlet{
 	}
 	
 	protected void doGet(HttpServletRequest request,HttpServletResponse response) throws IOException{
-		response.getWriter().println("HOLA MUNDO");
+		List<Carreras> carreras = session.createCriteria(Carreras.class).list();
+		
+		PrintWriter out = response.getWriter();
+		
+		out.println("<table class='table table-hover table-inverse'>"
+				+ "<tr>"
+				+ "<td>id</td>"
+				+ "<td>Nombre</td>"
+				+ "<td>Creditos</td>"
+				+ "</tr>");
+		for (Carreras carr:carreras) {
+			out.println("<tr>"
+					+ "<td>"+carr.getId()+"</td>"
+					+ "<td>"+carr.getNombre()+"</td>"
+					+ "<td>"+carr.getCreditos()+"</td>"
+					+ "</tr>");
+		}
+		out.print("</table>");
 	}
 	
 	protected void doPost(HttpServletRequest request,HttpServletResponse response) throws IOException{

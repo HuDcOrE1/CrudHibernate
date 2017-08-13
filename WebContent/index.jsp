@@ -9,6 +9,24 @@
 
 </head>
 <body>
-	<jsp:include page="Carreras/Formulario.jsp"></jsp:include>
+	<div id="contenedor">
+		<jsp:include page="Carreras/Formulario.jsp"></jsp:include>
+	</div>
+	<a id="mostraC">Mostrar Carreras</a>
 </body>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+	$("#mostraC").click(function(e){
+		$.ajax({
+			url:'CarrerasController',
+			type:'GET',
+			beforeSend:function(e){
+				
+			},
+			success:function(e){
+				$("#contenedor").html(e);
+			}
+		});
+	});
+</script>
 </html>
