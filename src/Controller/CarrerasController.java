@@ -38,12 +38,16 @@ public class CarrerasController extends HttpServlet{
 				+ "<td>id</td>"
 				+ "<td>Nombre</td>"
 				+ "<td>Creditos</td>"
+				+ "<td>Eliminar</td>"
+				+ "<td>Editar</td>"
 				+ "</tr>");
 		for (Carreras carr:carreras) {
 			out.println("<tr>"
 					+ "<td>"+carr.getId()+"</td>"
 					+ "<td>"+carr.getNombre()+"</td>"
 					+ "<td>"+carr.getCreditos()+"</td>"
+					+ "<td><a onclick='eliminar("+carr.getId()+")' >Eliminar</a></td>"
+					+ "<td><a onclick='editar("+carr.getId()+")' >Editar</a></td>"
 					+ "</tr>");
 		}
 		out.print("</table>");
@@ -55,9 +59,70 @@ public class CarrerasController extends HttpServlet{
 		case "insertar":
 			insertar(request,response);
 			break;
+		case "eliminar":
+			eliminar(request,response,Integer.parseInt(request.getParameter("id")));
+			break;
+		case "formulario":
+			editar(request,response,Integer.parseInt(request.getParameter("id")));
+			break;
+		case "editar":
+			editar2(request,response,Integer.parseInt(request.getParameter("id")));
+			break;
 
 		default:
 			break;
+		}
+	}
+	
+	public void eliminar(HttpServletRequest request,HttpServletResponse response, int idCarrera){
+		Transaction tx = null;
+		
+		try{
+			tx = session.beginTransaction();
+			tx.begin();
+			Carreras carr = session.get(Carreras.class, idCarrera);
+			session.delete(carr);
+			tx.commit();
+			
+		}catch(Exception e){
+			tx.rollback();
+		}
+	}
+	public void editar2(HttpServletRequest request,HttpServletResponse response, int idCarrera){
+		String nombre = request.getParameter("nombre");
+		int creditos = Integer.parseInt(request.getParameter("creditos"));
+		Transaction tx = null;
+		try{
+			tx = session.beginTransaction();
+			tx.begin();
+			Carreras car = session.get(Carreras.class, idCarrera);
+			car.setCreditos(creditos);
+			car.setNombre(nombre);
+			session.update(car);
+			tx.commit();
+		}catch(Exception e){
+			tx.rollback();
+		}
+	}
+	public void editar(HttpServletRequest request,HttpServletResponse response, int idCarrera){
+		Transaction tx = null;
+		try{
+			tx = session.beginTransaction();
+			tx.begin();
+			Carreras car = session.get(Carreras.class, idCarrera);
+			tx.commit();
+		
+			PrintWriter out = response.getWriter();
+			
+			out.println("<form>");
+				out.println("<input type='hidden' id='idCarrera' value='"+car.getId()+"'>");
+				out.println("<input type='text' class='form-control' id='nombreCarrera' value='"+car.getNombre()+"'>");
+				out.println("<input type='text' class='form-control' id='creditosCarrera' value='"+car.getCreditos()+"'>");
+				out.println("<button class='btn btn-primary' onclick='return editar2()'>Editar</button>");
+			out.println("<form>");
+			
+		}catch(Exception e){
+			tx.rollback();
 		}
 	}
 	

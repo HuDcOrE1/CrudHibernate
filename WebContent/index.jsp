@@ -17,6 +17,69 @@
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript">
 	$("#mostraC").click(function(e){
+		llamarAjaxObtenerCarreras();
+	});
+	
+	function eliminar(id){
+		if(confirm('Estas seguro que deseas realizar la eliminacion?')){
+			$.ajax({
+				url:'CarrerasController',
+				type:'POST',
+				data:{
+					'id':id,
+					'operacion':'eliminar'
+				},
+				beforeSend:function(e){
+					
+				},
+				success:function(e){
+					llamarAjaxObtenerCarreras();
+				}
+			});
+		}
+	}
+	function editar(id){
+		$.ajax({
+			url:'CarrerasController',
+			type:'POST',
+			data:{
+				'id':id,
+				'operacion':'formulario'
+			},
+			beforeSend:function(e){
+				
+			},
+			success:function(e){
+				$("#contenedor").html(e);
+			}
+		});
+	}
+	function editar2(){
+	
+		var idCarrera = $("#idCarrera").val();
+		var nombreCarrera = $("#nombreCarrera").val();
+		var creditosCarrera = $("#creditosCarrera").val();
+		
+		$.ajax({
+			url:'CarrerasController',
+			type:'POST',
+			data:{
+				'id':idCarrera,
+				'nombre':nombreCarrera,
+				'creditos':creditosCarrera,
+				'operacion':'editar'
+			},
+			beforeSend:function(e){
+				
+			},
+			success:function(e){
+				llamarAjaxObtenerCarreras();
+			}
+		});
+		
+		return false;
+	}
+	function llamarAjaxObtenerCarreras(){
 		$.ajax({
 			url:'CarrerasController',
 			type:'GET',
@@ -27,6 +90,6 @@
 				$("#contenedor").html(e);
 			}
 		});
-	});
+	}
 </script>
 </html>
